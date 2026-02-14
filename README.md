@@ -1,1 +1,1 @@
-# sp6-2_smart-table_starter
+https://github.com/Paradise4412/smart-table
