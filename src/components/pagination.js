@@ -7,9 +7,9 @@ export const initPagination = (
 	const pageTemplate = pages.firstElementChild.cloneNode(true)
 	pages.firstElementChild.remove()
 
-	let pageCount
+	let pageCount = 1
 
-	const applyPage = (query, state, action) => {
+	const applyPagination = (query, state, action) => {
 		const limit = state.rowsPerPage
 		let page = state.page
 
@@ -19,13 +19,13 @@ export const initPagination = (
 					page = Math.max(1, page - 1)
 					break
 				case 'next':
-					page = Math.min(pageCount || page, page + 1)
+					page = Math.min(pageCount, page + 1)
 					break
 				case 'first':
 					page = 1
 					break
 				case 'last':
-					page = pageCount || page
+					page = pageCount
 					break
 			}
 
@@ -35,7 +35,7 @@ export const initPagination = (
 		})
 	}
 
-	const refreshPager = (total, { page, limit }) => {
+	const updatePagination = (total, { page, limit }) => {
 		pageCount = Math.ceil(total / limit)
 
 		const visiblePages = getPages(page, pageCount, 5)
@@ -52,7 +52,7 @@ export const initPagination = (
 	}
 
 	return {
-		refreshPager,
-		applyPage,
+		applyPagination,
+		updatePagination,
 	}
 }

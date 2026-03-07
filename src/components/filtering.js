@@ -1,5 +1,5 @@
 export function initFiltering(elements) {
-	const fillOptions = (elements, indexes) => {
+	const updateIndexes = (elements, indexes) => {
 		Object.keys(indexes).forEach(elementName => {
 			elements[elementName].append(
 				...Object.values(indexes[elementName]).map(name => {
@@ -12,7 +12,7 @@ export function initFiltering(elements) {
 		})
 	}
 
-	const applyFilter = (query, state, action) => {
+	const applyFiltering = (query, state, action) => {
 		if (action && action.name === 'clear') {
 			const field = action.dataset.field
 			const parent = action.parentElement || action.closest('form') || document
@@ -39,7 +39,7 @@ export function initFiltering(elements) {
 	}
 
 	return {
-		fillOptions,
-		applyFilter,
+		updateIndexes,
+		applyFiltering,
 	}
 }
